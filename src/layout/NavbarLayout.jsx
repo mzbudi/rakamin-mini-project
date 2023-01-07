@@ -1,24 +1,44 @@
 import React, { useState } from "react";
 import Modal from "../components/Modal";
-import { ReactComponent as CloseSVG } from "../svg/Danger.svg";
 
 const NavbarLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const [input, setInput] = useState("");
+  const [input, setInput] = useState({
+    taskName: "",
+    progress: "",
+  });
 
-  // const handleInput = (e) => {
-  //   setInput(e.target.value);
-  // };
+  //create handle input function to multiple inputs
+  const handleInput = (e, field) => {
+    setInput({ ...input, [field]: e.target.value });
+  };
+
+  console.log(input);
 
   const modalConfig = {
-    title: "Delete Task",
-    icon: <CloseSVG className="mr-[11px]" />,
+    title: "Create Task",
     content: (
       <>
-        <p className="text-sm leading-6 font-normal text-modalContent font-nunito">
-          Are you sure you want to delete this task? Once a task is deleted,
-          there is no going back.
+        <p className="text-xs leading-5 font-bold text-modalContent font-nunito mt-4">
+          Task Name
         </p>
+        <input
+          type="text"
+          placeholder="Type your task"
+          className="w-full border-2 border-[#EDEDED] rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
+          onChange={(e) => handleInput(e, "taskName")}
+          value={input.taskName}
+        />
+        <p className="text-xs leading-5 font-bold text-modalContent font-nunito mt-4">
+          Progress
+        </p>
+        <input
+          type="text"
+          placeholder="70%"
+          className="border-2 border-[#EDEDED] rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
+          onChange={(e) => handleInput(e, "progress")}
+          value={input.progress}
+        />
       </>
     ),
     button: {
@@ -32,12 +52,12 @@ const NavbarLayout = () => {
         button: (
           <button
             type="button"
-            className="inline-flex mx-2 rounded-md border border-transparent bg-danger px-4 py-2 text-sm font-medium text-white hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            className="flex flex-row justify-center ml-[5px] rounded-md shadow-sm border border-borderPrimary bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-borderPrimary focus:outline-none focus-visible:ring-2 focus-visible:ring-borderPrimary focus-visible:ring-offset-2"
             onClick={() => {
               setIsOpen(false);
             }}
           >
-            Delete
+            <p className="font-nunito text-sm leading-6 text-white">Save Task</p>
           </button>
         ),
         onClick: () => {
