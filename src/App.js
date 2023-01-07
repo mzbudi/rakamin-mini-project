@@ -1,10 +1,10 @@
 import React from "react";
-import NavbarLayout from "./layout/NavbarLayout";
+import MainLayout from "./layout/MainLayout";
 
 function App() {
   return (
-    <div>
-      <NavbarLayout />
+    <div className="flex flex-col grow flex-1">
+      <MainLayout />
     </div>
   );
 }

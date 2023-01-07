@@ -13,8 +13,6 @@ const NavbarLayout = () => {
     setInput({ ...input, [field]: e.target.value });
   };
 
-  console.log(input);
-
   const modalConfig = {
     title: "Create Task",
     content: (

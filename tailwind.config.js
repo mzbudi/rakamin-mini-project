@@ -8,6 +8,10 @@ module.exports = {
         secondary: "#FA9810",
         danger: "#E11428",
         success: "#43936C",
+        cardPrimary: "#F7FEFF",
+        cardSecondary: "#FFFCF5",
+        cardDanger: "#F5B1B7",
+        cardSuccess: "#B8DBCA",
         borderPrimary: "#4DB5BC",
         borderSecondary: "#FEEABC",
         borderDanger: "#F5B1B7",
@@ -17,6 +21,7 @@ module.exports = {
       },
       fontFamily: {
         nunito: ["Nunito Sans"],
+        inter: ["Inter"],
       },
     },
   },
