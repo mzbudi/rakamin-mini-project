@@ -12,6 +12,8 @@ module.exports = {
         borderSecondary: "#FEEABC",
         borderDanger: "#F5B1B7",
         borderSuccess: "#B8DBCA",
+        modalTitle: "#1D1F20",
+        modalContent: "#404040",
       },
       fontFamily: {
         nunito: ["Nunito Sans"],
