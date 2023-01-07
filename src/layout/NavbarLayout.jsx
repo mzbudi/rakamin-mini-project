@@ -4,8 +4,8 @@ import Modal from "../components/Modal";
 const NavbarLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState({
-    taskName: "",
-    progress: "",
+    groupName: "",
+    description: "",
   });
 
   //create handle input function to multiple inputs
@@ -14,28 +14,29 @@ const NavbarLayout = () => {
   };
 
   const modalConfig = {
-    title: "Create Task",
+    title: "Add New Group",
     content: (
       <>
         <p className="text-xs leading-5 font-bold text-modalContent font-nunito mt-4">
-          Task Name
+          Add New Group
         </p>
         <input
           type="text"
-          placeholder="Type your task"
+          placeholder="Type your group"
           className="w-full border-2 border-[#EDEDED] rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
-          onChange={(e) => handleInput(e, "taskName")}
-          value={input.taskName}
+          onChange={(e) => handleInput(e, "groupName")}
+          value={input.groupName}
         />
         <p className="text-xs leading-5 font-bold text-modalContent font-nunito mt-4">
-          Progress
+          Description
         </p>
-        <input
+        <textarea
+          rows={3}
           type="text"
-          placeholder="70%"
-          className="border-2 border-[#EDEDED] rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
-          onChange={(e) => handleInput(e, "progress")}
-          value={input.progress}
+          placeholder="Type your description"
+          className="w-full border-2 border-[#EDEDED] rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
+          onChange={(e) => handleInput(e, "description")}
+          value={input.description}
         />
       </>
     ),
@@ -55,7 +56,9 @@ const NavbarLayout = () => {
               setIsOpen(false);
             }}
           >
-            <p className="font-nunito text-sm leading-6 text-white">Save Task</p>
+            <p className="font-nunito text-sm leading-6 text-white">
+              Save Task
+            </p>
           </button>
         ),
         onClick: () => {
