@@ -6,7 +6,7 @@ const KanbanCard = ({ progress }) => {
     <div className="flex flex-col bg-[#FAFAFA] border-[#E0E0E0] border rounded px-4 mt-2 mb-3 min-w-[294px]">
       <div className="border-b border-dashed border-[#E0E0E0] pt-4 pb-2">
         <p className="font-nunito font-bold text-sm leading-6 text-[#404040] ">
-          lore
+          Register client.
         </p>
       </div>
       <div className="flex flex-row mt-3 mb-5 items-center justify-between">

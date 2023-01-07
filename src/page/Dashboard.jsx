@@ -2,10 +2,10 @@ import React from "react";
 import KanbanGroup from "../components/Kanban/KanbanGroup";
 
 const kanBanColor = [
-  ["bg-cardPrimary", "border-borderPrimary"],
-  ["bg-cardSecondary", "border-borderSecondary"],
-  ["bg-cardDanger", "border-borderDanger"],
-  ["bg-cardSuccess", "border-borderSuccess"],
+  ["bg-cardPrimary", "border-borderPrimary", "text-primary"],
+  ["bg-cardSecondary", "border-borderSecondary", "text-secondary"],
+  ["bg-cardDanger", "border-borderDanger", "text-danger"],
+  ["bg-cardSuccess", "border-borderSuccess", "text-success"],
 ];
 
 const totalKanbanGroup = Array(4).fill(0);

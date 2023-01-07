@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import KanbanCard from "./KanbanCard";
-// import EmptyKanban from "./EmptyKanban";
+import EmptyKanban from "./EmptyKanban";
 import Modal from "../Modal";
 
 const KanbanGroup = ({ kanbanColor }) => {
@@ -73,14 +73,14 @@ const KanbanGroup = ({ kanbanColor }) => {
   return (
     <div className="my-6">
       <div
-        className={`p-6 ${kanbanColor[0]} row-span-full border ${kanbanColor[1]} rounded-lg shadow-md`}
+        className={`p-6 ${kanbanColor[0]} border ${kanbanColor[1]} rounded-lg shadow-md`}
       >
         {/* Group Name */}
         <div
-          className={`flex ${kanbanColor[1]} ${kanbanColor[1]} border rounded w-fit`}
+          className={`flex border ${kanbanColor[1]} ${kanbanColor[0]} rounded w-fit`}
         >
           <p
-            className={`font-nunito font-normal text-xs leading-5 px-2 py-[2px] text-${kanbanColor[0]}`}
+            className={`font-nunito font-normal text-xs leading-5 px-2 py-[2px] ${kanbanColor[2]}`}
           >
             Group Task 1
           </p>
@@ -92,6 +92,7 @@ const KanbanGroup = ({ kanbanColor }) => {
         {/* Card Kanban */}
 
         <KanbanCard progress={10} />
+        <EmptyKanban></EmptyKanban>
 
         {/* Button */}
         <div className="flex flex-col mt-2">
@@ -105,7 +106,7 @@ const KanbanGroup = ({ kanbanColor }) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 mr-1"
+              className="w-6 h-6 mr-1 text-[#333333]"
             >
               <path
                 strokeLinecap="round"
