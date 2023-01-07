@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import KanbanCard from "./KanbanCard";
+// import EmptyKanban from "./EmptyKanban";
 import Modal from "../Modal";
 
 const KanbanGroup = ({ kanbanColor }) => {
@@ -89,13 +90,15 @@ const KanbanGroup = ({ kanbanColor }) => {
           January - March
         </p>
         {/* Card Kanban */}
-        <KanbanCard progress={60} />
-        <KanbanCard progress={100} />
+
         <KanbanCard progress={10} />
 
         {/* Button */}
         <div className="flex flex-col mt-2">
-          <button className="flex items-center w-fit" onClick={()=>setIsOpen(true)}>
+          <button
+            className="flex items-center w-fit"
+            onClick={() => setIsOpen(true)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
