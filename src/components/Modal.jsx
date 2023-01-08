@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-function MyDialog({ isOpen, setIsOpen, modalConfig }) {
+function Modal({ isOpen, setIsOpen, modalConfig }) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -72,9 +72,9 @@ function MyDialog({ isOpen, setIsOpen, modalConfig }) {
                         setIsOpen(false);
                       }}
                     >
-                      <p className="font-nunito text-sm leading-6 text-modalTitle">{modalConfig.button.cancel.text}</p>
+                      <p className="font-nunito text-sm leading-6 text-modalTitle">Cancel</p>
                     </button>
-                    {modalConfig.button.secondary.button}
+                    {modalConfig.actionButton}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -86,4 +86,4 @@ function MyDialog({ isOpen, setIsOpen, modalConfig }) {
   );
 }
 
-export default MyDialog;
+export default Modal;

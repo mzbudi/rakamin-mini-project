@@ -40,32 +40,17 @@ const KanbanGroup = ({ kanbanColor }) => {
         />
       </>
     ),
-    button: {
-      cancel: {
-        text: "Cancel",
-        onClick: () => {
+    button: (
+      <button
+        type="button"
+        className="flex flex-row justify-center ml-[5px] rounded-md shadow-sm border border-borderPrimary bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-borderPrimary focus:outline-none focus-visible:ring-2 focus-visible:ring-borderPrimary focus-visible:ring-offset-2"
+        onClick={() => {
           setIsOpen(false);
-        },
-      },
-      secondary: {
-        button: (
-          <button
-            type="button"
-            className="flex flex-row justify-center ml-[5px] rounded-md shadow-sm border border-borderPrimary bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-borderPrimary focus:outline-none focus-visible:ring-2 focus-visible:ring-borderPrimary focus-visible:ring-offset-2"
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
-            <p className="font-nunito text-sm leading-6 text-white">
-              Save Task
-            </p>
-          </button>
-        ),
-        onClick: () => {
-          setIsOpen(false);
-        },
-      },
-    },
+        }}
+      >
+        <p className="font-nunito text-sm leading-6 text-white">Save Task</p>
+      </button>
+    ),
   };
   // DropDown Toggle
   // const dropDownToggle = () => {};
@@ -92,6 +77,7 @@ const KanbanGroup = ({ kanbanColor }) => {
         {/* Card Kanban */}
 
         <KanbanCard progress={10} />
+        <KanbanCard progress={100} />
         <EmptyKanban></EmptyKanban>
 
         {/* Button */}

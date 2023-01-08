@@ -10,9 +10,9 @@ import {
   ActiveEdit,
   InactiveEdit,
   More,
-} from "./SvgList";
+} from "./DropdownIconList";
 
-export default function Dropdown() {
+export default function Dropdown({setIsOpen}) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -69,6 +69,7 @@ export default function Dropdown() {
                   className={`${
                     active ? " text-primary" : "text-[#333333]"
                   }  group flex w-full items-center px-2 py-2 text-sm leading-6 font-nunito font-semibold`}
+                  onClick={() => setIsOpen(true)}
                 >
                   {active ? (
                     <ActiveEdit className="mr-6 h-5 w-5" />
