@@ -3,7 +3,11 @@ import KanbanCard from "./KanbanCard";
 import EmptyKanban from "./EmptyKanban";
 import Modal from "../Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { getItemsApi, selectKanban } from "../../slices/kanbanSlice";
+import {
+  getItemsApi,
+  selectKanban,
+  createNewItemsApi,
+} from "../../slices/kanbanSlice";
 
 const KanbanGroup = ({ kanbanColor, id, title, description }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +25,18 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
 
   const handleInput = (e, field) => {
     setInput({ ...input, [field]: e.target.value });
+  };
+
+  const handleAddTask = () => {
+    const payload = {
+      data: {
+        name: input.taskName,
+        progress_percentage: input.progress,
+      },
+      id,
+    };
+    dispatch(createNewItemsApi(payload));
+    setIsOpen(false);
   };
 
   const modalConfig = {
@@ -54,7 +70,7 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
         type="button"
         className="flex flex-row justify-center ml-[5px] rounded-md shadow-sm border border-borderPrimary bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-borderPrimary focus:outline-none focus-visible:ring-2 focus-visible:ring-borderPrimary focus-visible:ring-offset-2"
         onClick={() => {
-          setIsOpen(false);
+          handleAddTask();
         }}
       >
         <p className="font-nunito text-sm leading-6 text-white">Save Task</p>
@@ -101,7 +117,9 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
         <div className="flex flex-col mt-2">
           <button
             className="flex items-center w-fit"
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsOpen(true);
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

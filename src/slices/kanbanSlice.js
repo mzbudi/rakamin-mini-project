@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getTodos, getItems, createNewTodos } from "./api/kanbanApi";
+import {
+  getTodos,
+  getItems,
+  createNewTodos,
+  createNewItems,
+} from "./api/kanbanApi";
 
 const initialState = {
   value: {
@@ -23,6 +28,14 @@ export const createNewTodosApi = createAsyncThunk(
   "kanban/createNewTodos",
   async (data) => {
     const response = await createNewTodos(data);
+    return response.data;
+  }
+);
+
+export const createNewItemsApi = createAsyncThunk(
+  "kanban/createNewItems",
+  async (data) => {
+    const response = await createNewItems(data.id, data.data);
     return response.data;
   }
 );
@@ -60,6 +73,23 @@ export const kanbanSlice = createSlice({
         };
       })
       .addCase(createNewTodosApi.rejected, (state) => {
+        state.status = "err";
+        state = { ...state };
+      })
+      .addCase(createNewItemsApi.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.value = {
+          ...state.value,
+          items: {
+            ...state.value.items,
+            [action.payload.todo_id]: [
+              ...state.value.items[action.payload.todo_id],
+              action.payload,
+            ],
+          },
+        };
+      })
+      .addCase(createNewItemsApi.rejected, (state) => {
         state.status = "err";
         state = { ...state };
       });
