@@ -10,7 +10,7 @@ const KanbanCard = ({ progress }) => {
           Register client.
         </p>
       </div>
-      <div className="flex flex-row mt-3 mb-5 items-center justify-between">
+      <div className="flex flex-row mt-3 mb-3 items-center justify-between">
         <div className="flex space-x-3">
           <div className="w-44 bg-[#EDEDED] rounded-full h-4 ">
             <div
