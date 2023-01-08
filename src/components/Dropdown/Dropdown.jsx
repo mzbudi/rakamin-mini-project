@@ -13,9 +13,22 @@ import {
 } from "./DropdownIconList";
 import { ReactComponent as CloseSVG } from "../../svg/Danger.svg";
 import Modal from "../Modal";
+import { useDispatch } from "react-redux";
+import { deleteItemApi } from "../../slices/kanbanSlice";
 
-export default function Dropdown({ setIsOpen }) {
+export default function Dropdown({ setIsOpen, item_id, todo_id }) {
   const [modalOpen, setModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    const data = {
+      item_id,
+      todo_id,
+    };
+    dispatch(deleteItemApi(data));
+    setModalOpen(false);
+  };
 
   const modalConfig = {
     title: "Delete Task",
@@ -33,7 +46,7 @@ export default function Dropdown({ setIsOpen }) {
         type="button"
         className="inline-flex mx-2 rounded-md border border-transparent bg-danger px-4 py-2 text-sm font-medium text-white hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
         onClick={() => {
-          setIsOpen(false);
+          handleDelete();
         }}
       >
         Delete

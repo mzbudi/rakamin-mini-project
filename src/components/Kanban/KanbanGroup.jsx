@@ -99,11 +99,11 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
 
         {kanban.items[id] &&
           kanban.items[id].map((item) => {
-            console.log(item);
             return (
               <KanbanCard
                 key={item.id}
-                id={item.id}
+                item_id={item.id}
+                todo_id={id}
                 progress={item.progress_percentage}
                 card_name={item.name}
               />

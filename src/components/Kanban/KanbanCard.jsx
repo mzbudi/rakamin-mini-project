@@ -3,16 +3,13 @@ import { ReactComponent as Checklist } from "../../svg/Checklist.svg";
 import Dropdown from "../Dropdown/Dropdown";
 import Modal from "../Modal";
 
-const KanbanCard = ({ progress, id, card_name }) => {
+const KanbanCard = ({ progress, item_id, todo_id, card_name }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState({});
 
-  //create handle input function to multiple inputs
   const handleInput = (e, field) => {
     setInput({ ...input, [field]: e.target.value });
   };
-
-  //create open modal type function
 
   const modalConfig = {
     title: "Edit Task",
@@ -78,7 +75,7 @@ const KanbanCard = ({ progress, id, card_name }) => {
             </p>
           )}
         </div>
-        <Dropdown setIsOpen={setIsOpen} />
+        <Dropdown setIsOpen={setIsOpen} item_id={item_id} todo_id={todo_id} />
       </div>
     </div>
   );
