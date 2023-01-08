@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getTodos, getItems } from "./api/kanbanApi";
+import { getTodos, getItems, createNewTodos } from "./api/kanbanApi";
 
 const initialState = {
   value: {
@@ -19,15 +19,20 @@ export const getItemsApi = createAsyncThunk("kanban/getItems", async (id) => {
   return { [id]: response.data };
 });
 
+export const createNewTodosApi = createAsyncThunk(
+  "kanban/createNewTodos",
+  async (data) => {
+    const response = await createNewTodos(data);
+    return response.data;
+  }
+);
+
 export const kanbanSlice = createSlice({
   name: "kanban",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getTodosApi.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(getTodosApi.fulfilled, (state, action) => {
         state.status = "idle";
         state.value = { ...state.value, todos: action.payload };
@@ -35,9 +40,6 @@ export const kanbanSlice = createSlice({
       .addCase(getTodosApi.rejected, (state) => {
         state.status = "err";
         state = { ...state };
-      })
-      .addCase(getItemsApi.pending, (state) => {
-        state.status = "loading";
       })
       .addCase(getItemsApi.fulfilled, (state, action) => {
         state.status = "idle";
@@ -47,6 +49,17 @@ export const kanbanSlice = createSlice({
         };
       })
       .addCase(getItemsApi.rejected, (state) => {
+        state.status = "err";
+        state = { ...state };
+      })
+      .addCase(createNewTodosApi.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.value = {
+          ...state.value,
+          todos: [...state.value.todos, action.payload],
+        };
+      })
+      .addCase(createNewTodosApi.rejected, (state) => {
         state.status = "err";
         state = { ...state };
       });
