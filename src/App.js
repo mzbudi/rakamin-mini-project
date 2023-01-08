@@ -1,5 +1,6 @@
 import React from "react";
 import MainLayout from "./layout/MainLayout";
+// import Auth from "./page/Auth";
 
 function App() {
   return (
