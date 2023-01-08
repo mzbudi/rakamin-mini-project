@@ -15,8 +15,6 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
   const dispatch = useDispatch();
   const kanban = useSelector(selectKanban);
 
-  // console.log(kanban);
-
   useEffect(() => {
     dispatch(getItemsApi(id));
   }, [dispatch, id]);
@@ -51,7 +49,7 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
         />
       </>
     ),
-    button: (
+    actionButton: (
       <button
         type="button"
         className="flex flex-row justify-center ml-[5px] rounded-md shadow-sm border border-borderPrimary bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-borderPrimary focus:outline-none focus-visible:ring-2 focus-visible:ring-borderPrimary focus-visible:ring-offset-2"
@@ -63,8 +61,6 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
       </button>
     ),
   };
-  // DropDown Toggle
-  // const dropDownToggle = () => {};
 
   return (
     <div className="my-6" key={id}>
@@ -85,7 +81,6 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
           {description}
         </p>
 
-        {/* render kanbancard component using object keys function from kanban.items based on id */}
         {kanban.items[id] &&
           kanban.items[id].map((item) => {
             console.log(item);
@@ -99,13 +94,10 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
             );
           })}
 
-        {/* <KanbanCard progress={10} />
-        <KanbanCard progress={100} />
-        <KanbanCard progress={100} />
-        <KanbanCard progress={100} />
-        <EmptyKanban></EmptyKanban> */}
+        {kanban.items[id] && kanban.items[id].length === 0 && (
+          <EmptyKanban title="No Task" />
+        )}
 
-        {/* Button */}
         <div className="flex flex-col mt-2">
           <button
             className="flex items-center w-fit"
