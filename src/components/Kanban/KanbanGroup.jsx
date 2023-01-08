@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import KanbanCard from "./KanbanCard";
 import EmptyKanban from "./EmptyKanban";
 import Modal from "../Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { getItemsApi, selectKanban } from "../../slices/kanbanSlice";
 
-const KanbanGroup = ({ kanbanColor }) => {
+const KanbanGroup = ({ kanbanColor, id, title, description }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState({
     taskName: "",
     progress: "",
   });
+
+  const dispatch = useDispatch();
+  const kanban = useSelector(selectKanban);
+
+  // console.log(kanban);
+
+  useEffect(() => {
+    dispatch(getItemsApi(id));
+  }, [dispatch, id]);
 
   const handleInput = (e, field) => {
     setInput({ ...input, [field]: e.target.value });
@@ -56,31 +67,43 @@ const KanbanGroup = ({ kanbanColor }) => {
   // const dropDownToggle = () => {};
 
   return (
-    <div className="my-6">
+    <div className="my-6" key={id}>
       <div
         className={`p-6 ${kanbanColor[0]} border ${kanbanColor[1]} rounded-lg shadow-md`}
       >
-        {/* Group Name */}
         <div
           className={`flex border ${kanbanColor[1]} ${kanbanColor[0]} rounded w-fit`}
         >
           <p
             className={`font-nunito font-normal text-xs leading-5 px-2 py-[2px] ${kanbanColor[2]}`}
           >
-            Group Task 1
+            {title}
           </p>
         </div>
-        {/* Month */}
-        <p className="font-nunito font-bold text-xs leading-5 text-[#404040] pt-2">
-          January - March
-        </p>
-        {/* Card Kanban */}
 
-        <KanbanCard progress={10} />
+        <p className="font-nunito font-bold text-xs leading-5 text-[#404040] pt-2">
+          {description}
+        </p>
+
+        {/* render kanbancard component using object keys function from kanban.items based on id */}
+        {kanban.items[id] &&
+          kanban.items[id].map((item) => {
+            console.log(item);
+            return (
+              <KanbanCard
+                key={item.id}
+                id={item.id}
+                progress={item.progress_percentage}
+                card_name={item.name}
+              />
+            );
+          })}
+
+        {/* <KanbanCard progress={10} />
         <KanbanCard progress={100} />
         <KanbanCard progress={100} />
         <KanbanCard progress={100} />
-        <EmptyKanban></EmptyKanban>
+        <EmptyKanban></EmptyKanban> */}
 
         {/* Button */}
         <div className="flex flex-col mt-2">

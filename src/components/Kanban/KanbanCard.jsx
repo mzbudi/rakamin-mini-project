@@ -3,7 +3,7 @@ import { ReactComponent as Checklist } from "../../svg/Checklist.svg";
 import Dropdown from "../Dropdown/Dropdown";
 import Modal from "../Modal";
 
-const KanbanCard = ({ progress }) => {
+const KanbanCard = ({ progress, id, card_name }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState({});
 
@@ -57,7 +57,7 @@ const KanbanCard = ({ progress }) => {
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} modalConfig={modalConfig} />
       <div className="border-b border-dashed border-[#E0E0E0] pt-4 pb-2">
         <p className="font-nunito font-bold text-sm leading-6 text-[#404040] ">
-          Register client.
+          {card_name}
         </p>
       </div>
       <div className="flex flex-row mt-3 mb-3 items-center justify-between">
