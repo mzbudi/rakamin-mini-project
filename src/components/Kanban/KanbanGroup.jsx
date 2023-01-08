@@ -78,6 +78,8 @@ const KanbanGroup = ({ kanbanColor }) => {
 
         <KanbanCard progress={10} />
         <KanbanCard progress={100} />
+        <KanbanCard progress={100} />
+        <KanbanCard progress={100} />
         <EmptyKanban></EmptyKanban>
 
         {/* Button */}

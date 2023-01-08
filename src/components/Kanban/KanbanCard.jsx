@@ -12,7 +12,7 @@ const KanbanCard = ({ progress }) => {
     setInput({ ...input, [field]: e.target.value });
   };
 
-  console.log(input);
+  //create open modal type function
 
   const modalConfig = {
     title: "Edit Task",
@@ -64,7 +64,9 @@ const KanbanCard = ({ progress }) => {
         <div className="flex space-x-3">
           <div className="w-44 bg-[#EDEDED] rounded-full h-4 ">
             <div
-              className={`${progress === 100 ? 'bg-success' : 'bg-primary'}  rounded-full h-4`}
+              className={`${
+                progress === 100 ? "bg-success" : "bg-primary"
+              }  rounded-full h-4`}
               style={{ width: progress === 100 ? "100%" : `${progress}%` }}
             ></div>
           </div>

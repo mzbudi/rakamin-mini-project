@@ -39,7 +39,7 @@ function Modal({ isOpen, setIsOpen, modalConfig }) {
                   <Dialog.Title className="text-lg font-bold font-nunito leading-7 flex items-center text-modalTitle justify-between mb-2">
                     <div className="flex items-center">
                       {modalConfig.icon ? modalConfig.icon : null}
-                      {modalConfig.title}
+                      {modalConfig.title ? modalConfig.title : null}
                     </div>
                     <button
                       onClick={() => {
@@ -62,7 +62,7 @@ function Modal({ isOpen, setIsOpen, modalConfig }) {
                       </svg>
                     </button>
                   </Dialog.Title>
-                  <div className="mt-2">{modalConfig.content}</div>
+                  <div className="mt-2">{modalConfig.content ? modalConfig.content : null}</div>
 
                   <div className="mt-4 flex justify-end">
                     <button
@@ -74,7 +74,7 @@ function Modal({ isOpen, setIsOpen, modalConfig }) {
                     >
                       <p className="font-nunito text-sm leading-6 text-modalTitle">Cancel</p>
                     </button>
-                    {modalConfig.actionButton}
+                    {modalConfig.actionButton ? modalConfig.actionButton : null}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
