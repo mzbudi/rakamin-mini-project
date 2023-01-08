@@ -24,7 +24,7 @@ const KanbanGroup = ({ kanbanColor }) => {
         <input
           type="text"
           placeholder="Type your task"
-          className="w-full border-2 border-[#EDEDED] rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
+          className="w-full border-2 border-[#E0E0E0] focus:outline-primary focus:caret-primary active:outline-borderPrimary rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
           onChange={(e) => handleInput(e, "taskName")}
           value={input.taskName}
         />
@@ -34,7 +34,7 @@ const KanbanGroup = ({ kanbanColor }) => {
         <input
           type="text"
           placeholder="70%"
-          className="border-2 border-[#EDEDED] rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
+          className="border-2 border-[#E0E0E0] focus:outline-primary focus:caret-primary active:outline-borderPrimary rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
           onChange={(e) => handleInput(e, "progress")}
           value={input.progress}
         />

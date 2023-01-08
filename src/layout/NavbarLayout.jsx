@@ -23,7 +23,7 @@ const NavbarLayout = () => {
         <input
           type="text"
           placeholder="Type your group"
-          className="w-full border-2  focus:border-primary focus:outline-primary focus:caret-primary rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
+          className="w-full border-2 border-[#E0E0E0] focus:outline-primary focus:caret-primary active:outline-borderPrimary rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
           onChange={(e) => handleInput(e, "groupName")}
           value={input.groupName}
         />
@@ -34,7 +34,7 @@ const NavbarLayout = () => {
           rows={3}
           type="text"
           placeholder="Type your description"
-          className="w-full border-2 border-[#EDEDED] rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50 focus:border-primary focus:outline-primary"
+          className="w-full border-2 border-[#E0E0E0] focus:outline-primary focus:caret-primary active:outline-borderPrimary rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50 "
           onChange={(e) => handleInput(e, "description")}
           value={input.description}
         />
