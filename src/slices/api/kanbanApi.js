@@ -1,8 +1,7 @@
 import axios from "axios";
 
 export const getTodos = () => {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjYsImV4cCI6MTY4MTgwODUxM30.DVSFxh5AWBKUMdhQAMqVZMDp3_6xcsN6aP3ZAlf4fmI";
+  const token = localStorage.getItem("auth_token");
   return axios.get("https://todo-api-18-140-52-65.rakamin.com/todos", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -11,8 +10,7 @@ export const getTodos = () => {
 };
 
 export const getItems = (id) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjYsImV4cCI6MTY4MTgwODUxM30.DVSFxh5AWBKUMdhQAMqVZMDp3_6xcsN6aP3ZAlf4fmI";
+  const token = localStorage.getItem("auth_token");
   return axios.get(
     `https://todo-api-18-140-52-65.rakamin.com/todos/${id}/items`,
     {
@@ -24,8 +22,7 @@ export const getItems = (id) => {
 };
 
 export const createNewTodos = (data) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjYsImV4cCI6MTY4MTgwODUxM30.DVSFxh5AWBKUMdhQAMqVZMDp3_6xcsN6aP3ZAlf4fmI";
+  const token = localStorage.getItem("auth_token");
   return axios.post("https://todo-api-18-140-52-65.rakamin.com/todos", data, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -34,8 +31,7 @@ export const createNewTodos = (data) => {
 };
 
 export const createNewItems = (id, data) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjYsImV4cCI6MTY4MTgwODUxM30.DVSFxh5AWBKUMdhQAMqVZMDp3_6xcsN6aP3ZAlf4fmI";
+  const token = localStorage.getItem("auth_token");
   return axios.post(
     `https://todo-api-18-140-52-65.rakamin.com/todos/${id}/items`,
     data,
@@ -48,8 +44,7 @@ export const createNewItems = (id, data) => {
 };
 
 export const deleteItem = (data) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjYsImV4cCI6MTY4MTgwODUxM30.DVSFxh5AWBKUMdhQAMqVZMDp3_6xcsN6aP3ZAlf4fmI";
+  const token = localStorage.getItem("auth_token");
   return axios.delete(
     `https://todo-api-18-140-52-65.rakamin.com/todos/${data.todo_id}/items/${data.item_id}`,
     {
@@ -61,8 +56,7 @@ export const deleteItem = (data) => {
 };
 
 export const updateItem = (data) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjYsImV4cCI6MTY4MTgwODUxM30.DVSFxh5AWBKUMdhQAMqVZMDp3_6xcsN6aP3ZAlf4fmI";
+  const token = localStorage.getItem("auth_token");
   return axios.patch(
     `https://todo-api-18-140-52-65.rakamin.com/todos/${data.todo_id}/items/${data.id}`,
     data,
