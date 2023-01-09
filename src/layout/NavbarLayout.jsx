@@ -1,54 +1,68 @@
 import React, { useState } from "react";
 import Modal from "../components/Modal";
-import { ReactComponent as CloseSVG } from "../svg/Danger.svg";
+import { useDispatch } from "react-redux";
+import { createNewTodosApi } from "../slices/kanbanSlice";
 
 const NavbarLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const [input, setInput] = useState("");
+  const [input, setInput] = useState({
+    title: "",
+    description: "",
+  });
 
-  // const handleInput = (e) => {
-  //   setInput(e.target.value);
-  // };
+  const dispatch = useDispatch();
+
+  const handleCreateNewTodos = () => {
+    dispatch(createNewTodosApi(input));
+    setIsOpen(false);
+  };
+
+  const handleInput = (e, field) => {
+    setInput({ ...input, [field]: e.target.value });
+  };
 
   const modalConfig = {
-    title: "Delete Task",
-    icon: <CloseSVG className="mr-[11px]" />,
+    title: "Add New Group",
     content: (
       <>
-        <p className="text-sm leading-6 font-normal text-modalContent font-nunito">
-          Are you sure you want to delete this task? Once a task is deleted,
-          there is no going back.
+        <p className="text-xs leading-5 font-bold text-modalContent font-nunito mt-4">
+          Add New Group
         </p>
+        <input
+          type="text"
+          placeholder="Type your group"
+          className="w-full border-2 border-[#E0E0E0] focus:outline-primary focus:caret-primary active:outline-borderPrimary rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
+          onChange={(e) => handleInput(e, "title")}
+          value={input.title}
+        />
+        <p className="text-xs leading-5 font-bold  text-modalContent font-nunito mt-4">
+          Description
+        </p>
+        <textarea
+          rows={3}
+          type="text"
+          placeholder="Type your description"
+          className="w-full border-2 border-[#E0E0E0] focus:outline-primary focus:caret-primary active:outline-borderPrimary rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50 "
+          onChange={(e) => handleInput(e, "description")}
+          value={input.description}
+        />
       </>
     ),
-    button: {
-      cancel: {
-        text: "Cancel",
-        onClick: () => {
-          setIsOpen(false);
-        },
-      },
-      secondary: {
-        button: (
-          <button
-            type="button"
-            className="inline-flex mx-2 rounded-md border border-transparent bg-danger px-4 py-2 text-sm font-medium text-white hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
-            Delete
-          </button>
-        ),
-        onClick: () => {
-          setIsOpen(false);
-        },
-      },
-    },
+    actionButton: (
+      <button
+        type="button"
+        className="flex flex-row justify-center ml-[5px] rounded-md shadow-sm border border-borderPrimary bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-borderPrimary focus:outline-none focus-visible:ring-2 focus-visible:ring-borderPrimary focus-visible:ring-offset-2"
+        onClick={() => {
+          handleCreateNewTodos();
+        }}
+      >
+        <p className="font-nunito text-sm leading-6 text-white">Save Task</p>
+      </button>
+    ),
   };
 
   return (
-    <div>
+    <div className="w-full">
       <header>
         <nav className="w-full bg-[#FFFFFF] py-[18px] px-5 border-b border-[#E0E0E0]">
           <ul className="flex">

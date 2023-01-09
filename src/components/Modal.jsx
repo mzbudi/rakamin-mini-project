@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-function MyDialog({ isOpen, setIsOpen, modalConfig }) {
+function Modal({ isOpen, setIsOpen, modalConfig }) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -36,10 +36,10 @@ function MyDialog({ isOpen, setIsOpen, modalConfig }) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-[10px] bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title className="text-lg font-bold font-nunito leading-7 flex items-center text-modalTitle justify-between">
+                  <Dialog.Title className="text-lg font-bold font-nunito leading-7 flex items-center text-modalTitle justify-between mb-2">
                     <div className="flex items-center">
                       {modalConfig.icon ? modalConfig.icon : null}
-                      {modalConfig.title}
+                      {modalConfig.title ? modalConfig.title : null}
                     </div>
                     <button
                       onClick={() => {
@@ -50,31 +50,31 @@ function MyDialog({ isOpen, setIsOpen, modalConfig }) {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         stroke="currentColor"
-                        class="w-6 h-6 hover:scale-110"
+                        className="w-6 h-6 hover:scale-110"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                           d="M6 18L18 6M6 6l12 12"
                         />
                       </svg>
                     </button>
                   </Dialog.Title>
-                  <div className="mt-2">{modalConfig.content}</div>
+                  <div className="mt-2">{modalConfig.content ? modalConfig.content : null}</div>
 
                   <div className="mt-4 flex justify-end">
                     <button
                       type="button"
-                      className="flex flex-row justify-center items-center px-4 py-1 rounded-lg border-[1px] shadow-sm border-[#E0E0E0] hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="flex flex-row mr-[5px] justify-center items-center px-4 py-1 rounded-lg border shadow-sm border-[#E0E0E0] hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={() => {
                         setIsOpen(false);
                       }}
                     >
-                      {modalConfig.button.cancel.text}
+                      <p className="font-nunito text-sm leading-6 text-modalTitle">Cancel</p>
                     </button>
-                    {modalConfig.button.secondary.button}
+                    {modalConfig.actionButton ? modalConfig.actionButton : null}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -86,4 +86,4 @@ function MyDialog({ isOpen, setIsOpen, modalConfig }) {
   );
 }
 
-export default MyDialog;
+export default Modal;
