@@ -19,8 +19,6 @@ const KanbanCard = ({
     progress: progress || "",
   });
 
-  console.log(input);
-
   const dispatch = useDispatch();
 
   const handleUpdate = () => {
