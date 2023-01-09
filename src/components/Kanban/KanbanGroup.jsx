@@ -9,7 +9,7 @@ import {
   createNewItemsApi,
 } from "../../slices/kanbanSlice";
 
-const KanbanGroup = ({ kanbanColor, id, title, description }) => {
+const KanbanGroup = ({ kanbanColor, id, title, description, nextGroup, prevGroup }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState({
     taskName: "",
@@ -106,6 +106,8 @@ const KanbanGroup = ({ kanbanColor, id, title, description }) => {
                 todo_id={id}
                 progress={item.progress_percentage}
                 card_name={item.name}
+                nextGroup={nextGroup}
+                prevGroup={prevGroup}
               />
             );
           })}

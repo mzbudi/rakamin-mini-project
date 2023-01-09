@@ -61,7 +61,6 @@ export const deleteItem = (data) => {
 };
 
 export const updateItem = (data) => {
-  console.log(data);
   const token =
     "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjYsImV4cCI6MTY4MTgwODUxM30.DVSFxh5AWBKUMdhQAMqVZMDp3_6xcsN6aP3ZAlf4fmI";
   return axios.patch(

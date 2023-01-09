@@ -14,9 +14,17 @@ import {
 import { ReactComponent as CloseSVG } from "../../svg/Danger.svg";
 import Modal from "../Modal";
 import { useDispatch } from "react-redux";
-import { deleteItemApi, moveRightApi } from "../../slices/kanbanSlice";
+import { deleteItemApi, moveCard } from "../../slices/kanbanSlice";
 
-export default function Dropdown({ setIsOpen, item_id, todo_id }) {
+export default function Dropdown({
+  setIsOpen,
+  item_id,
+  todo_id,
+  progress,
+  card_name,
+  nextGroup,
+  prevGroup,
+}) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -30,15 +38,15 @@ export default function Dropdown({ setIsOpen, item_id, todo_id }) {
     setModalOpen(false);
   };
 
-  const moveRight = () => {
+  const handleMoveCard = (target) => {
     const data = {
       id: item_id,
       todo_id,
-      target_todo_id: 235,
-      progress_percentage: 50,
-      name: "Print",
+      target_todo_id: target,
+      progress_percentage: progress,
+      name: card_name,
     };
-    dispatch(moveRightApi(data));
+    dispatch(moveCard(data));
   };
 
   const modalConfig = {
@@ -88,39 +96,44 @@ export default function Dropdown({ setIsOpen, item_id, todo_id }) {
       >
         <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
           <div className="px-1 py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? " text-primary" : "text-[#333333]"
-                  } group flex w-full items-center px-2 py-2 text-sm leading-6 font-nunito font-semibold`}
-                  onClick={() => moveRight()}
-                >
-                  {active ? (
-                    <ActiveMoveRight className="mr-5 w-6 h-6" />
-                  ) : (
-                    <InactiveMoveRight className="mr-5 w-6 h-6" />
-                  )}
-                  Move Right
-                </button>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? " text-primary" : "text-[#333333]"
-                  }  group flex w-full items-center px-2 py-2 text-sm leading-6 font-nunito font-semibold`}
-                >
-                  {active ? (
-                    <ActiveMoveLeft className="mr-5 h-6 w-6" />
-                  ) : (
-                    <InactiveMoveLeft className="mr-5 w-6 h-6" />
-                  )}
-                  Move Left
-                </button>
-              )}
-            </Menu.Item>
+            {nextGroup && (
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active ? " text-primary" : "text-[#333333]"
+                    } group flex w-full items-center px-2 py-2 text-sm leading-6 font-nunito font-semibold`}
+                    onClick={() => handleMoveCard(nextGroup)}
+                  >
+                    {active ? (
+                      <ActiveMoveRight className="mr-5 w-6 h-6" />
+                    ) : (
+                      <InactiveMoveRight className="mr-5 w-6 h-6" />
+                    )}
+                    Move Right
+                  </button>
+                )}
+              </Menu.Item>
+            )}
+            {prevGroup && (
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active ? " text-primary" : "text-[#333333]"
+                    }  group flex w-full items-center px-2 py-2 text-sm leading-6 font-nunito font-semibold`}
+                    onClick={() => handleMoveCard(prevGroup)}
+                  >
+                    {active ? (
+                      <ActiveMoveLeft className="mr-5 h-6 w-6" />
+                    ) : (
+                      <InactiveMoveLeft className="mr-5 w-6 h-6" />
+                    )}
+                    Move Left
+                  </button>
+                )}
+              </Menu.Item>
+            )}
             <Menu.Item>
               {({ active }) => (
                 <button

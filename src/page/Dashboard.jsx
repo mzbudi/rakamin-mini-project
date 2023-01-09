@@ -17,6 +17,8 @@ const generateKanbanGroup = (kanbanTodos, kanbanColor) => {
         kanbanColor={kanbanColor[index % kanbanColor.length]}
         key={index}
         {...item}
+        nextGroup={index !== kanbanTodos.length - 1 ? kanbanTodos[index + 1].id : null}
+        prevGroup={index !== 0 ? kanbanTodos[index - 1].id : null}
       />
     );
   });
@@ -25,8 +27,6 @@ const generateKanbanGroup = (kanbanTodos, kanbanColor) => {
 const Dashboard = () => {
   const kanban = useSelector(selectKanban);
   const dispatch = useDispatch();
-
-  console.log(kanban);
 
   useEffect(() => {
     dispatch(getTodosApi());

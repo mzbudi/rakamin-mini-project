@@ -5,20 +5,25 @@ import Modal from "../Modal";
 import { useDispatch } from "react-redux";
 import { updateItemApi } from "../../slices/kanbanSlice";
 
-const KanbanCard = ({ progress, item_id, todo_id, card_name }) => {
+const KanbanCard = ({
+  progress,
+  item_id,
+  todo_id,
+  card_name,
+  nextGroup,
+  prevGroup,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState({
     taskName: card_name || "",
     progress: progress || "",
   });
 
-  console.log(input);
-
   const dispatch = useDispatch();
 
   const handleUpdate = () => {
     const data = {
-      id : item_id,
+      id: item_id,
       todo_id,
       target_todo_id: todo_id,
       progress_percentage: input.progress,
@@ -96,7 +101,15 @@ const KanbanCard = ({ progress, item_id, todo_id, card_name }) => {
             </p>
           )}
         </div>
-        <Dropdown setIsOpen={setIsOpen} item_id={item_id} todo_id={todo_id} />
+        <Dropdown
+          setIsOpen={setIsOpen}
+          item_id={item_id}
+          todo_id={todo_id}
+          nextGroup={nextGroup}
+          prevGroup={prevGroup}
+          progress={progress} 
+          card_name={card_name}
+        />
       </div>
     </div>
   );
