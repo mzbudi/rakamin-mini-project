@@ -5,6 +5,7 @@ import {
   createNewTodos,
   createNewItems,
   deleteItem,
+  updateItem,
 } from "./api/kanbanApi";
 
 const initialState = {
@@ -45,6 +46,14 @@ export const deleteItemApi = createAsyncThunk(
   "kanban/deleteItem",
   async (data) => {
     await deleteItem(data);
+    return data;
+  }
+);
+
+export const updateItemApi = createAsyncThunk(
+  "kanban/updateItem",
+  async (data) => {
+    await updateItem(data);
     return data;
   }
 );
@@ -117,6 +126,28 @@ export const kanbanSlice = createSlice({
         };
       })
       .addCase(deleteItemApi.rejected, (state) => {
+        state.status = "err";
+        state = { ...state };
+      })
+      .addCase(updateItemApi.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.value = {
+          ...state.value,
+          items: {
+            ...state.value.items,
+            [action.payload.todo_id]: state.value.items[
+              action.payload.todo_id
+            ].map((item) => {
+              console.log(action.payload);
+              if (item.id === action.payload.id) {
+                return action.payload;
+              }
+              return item;
+            }),
+          },
+        };
+      })
+      .addCase(updateItemApi.rejected, (state) => {
         state.status = "err";
         state = { ...state };
       });

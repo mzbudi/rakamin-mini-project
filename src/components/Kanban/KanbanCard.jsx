@@ -2,10 +2,31 @@ import React, { useState } from "react";
 import { ReactComponent as Checklist } from "../../svg/Checklist.svg";
 import Dropdown from "../Dropdown/Dropdown";
 import Modal from "../Modal";
+import { useDispatch } from "react-redux";
+import { updateItemApi } from "../../slices/kanbanSlice";
 
 const KanbanCard = ({ progress, item_id, todo_id, card_name }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState({
+    taskName: card_name || "",
+    progress: progress || "",
+  });
+
+  console.log(input);
+
+  const dispatch = useDispatch();
+
+  const handleUpdate = () => {
+    const data = {
+      id : item_id,
+      todo_id,
+      target_todo_id: todo_id,
+      progress_percentage: input.progress,
+      name: input.taskName,
+    };
+    dispatch(updateItemApi(data));
+    setIsOpen(false);
+  };
 
   const handleInput = (e, field) => {
     setInput({ ...input, [field]: e.target.value });
@@ -42,7 +63,7 @@ const KanbanCard = ({ progress, item_id, todo_id, card_name }) => {
         type="button"
         className="flex flex-row justify-center ml-[5px] rounded-md shadow-sm border border-borderPrimary bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-borderPrimary focus:outline-none focus-visible:ring-2 focus-visible:ring-borderPrimary focus-visible:ring-offset-2"
         onClick={() => {
-          setIsOpen(false);
+          handleUpdate();
         }}
       >
         <p className="font-nunito text-sm leading-6 text-white">Save Task</p>
