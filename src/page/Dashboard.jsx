@@ -17,7 +17,9 @@ const generateKanbanGroup = (kanbanTodos, kanbanColor) => {
         kanbanColor={kanbanColor[index % kanbanColor.length]}
         key={index}
         {...item}
-        nextGroup={index !== kanbanTodos.length - 1 ? kanbanTodos[index + 1].id : null}
+        nextGroup={
+          index !== kanbanTodos.length - 1 ? kanbanTodos[index + 1].id : null
+        }
         prevGroup={index !== 0 ? kanbanTodos[index - 1].id : null}
       />
     );
@@ -33,10 +35,8 @@ const Dashboard = () => {
   }, [dispatch]);
 
   return (
-    <div className=" flex flex-col w-full h-full overflow-x-auto">
-      <div className="flex h-full w-full mx-6 space-x-4">
-        {generateKanbanGroup(kanban.todos, kanBanColor)}
-      </div>
+    <div className=" flex w-full h-full p-3 overflow-x-auto space-x-3">
+      {generateKanbanGroup(kanban.todos, kanBanColor)}
     </div>
   );
 };

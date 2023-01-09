@@ -19,6 +19,8 @@ const KanbanCard = ({
     progress: progress || "",
   });
 
+  console.log(input);
+
   const dispatch = useDispatch();
 
   const handleUpdate = () => {
@@ -26,7 +28,7 @@ const KanbanCard = ({
       id: item_id,
       todo_id,
       target_todo_id: todo_id,
-      progress_percentage: input.progress,
+      progress_percentage: input.progress === "" ? 0 : input.progress,
       name: input.taskName,
     };
     dispatch(updateItemApi(data));
@@ -35,6 +37,28 @@ const KanbanCard = ({
 
   const handleInput = (e, field) => {
     setInput({ ...input, [field]: e.target.value });
+  };
+
+  const handleInputProgress = (e) => {
+    const value = e.target.value;
+    if (value.length > 3) {
+      return;
+    }
+    if (value > 100) {
+      setInput({ ...input, progress: 100 });
+      return;
+    }
+    if (value < 0) {
+      setInput({ ...input, progress: 0 });
+      return;
+    }
+    if (value === "") {
+      setInput({ ...input, progress: "" });
+      return;
+    }
+    if (value.match(/^[0-9]*$/)) {
+      setInput({ ...input, progress: value });
+    }
   };
 
   const modalConfig = {
@@ -58,7 +82,7 @@ const KanbanCard = ({
           type="text"
           placeholder="70%"
           className="border-2 border-[#E0E0E0] focus:outline-primary focus:caret-primary active:outline-borderPrimary rounded-lg px-4 py-2 mt-2 text-xs leading-5 opacity-50"
-          onChange={(e) => handleInput(e, "progress")}
+          onChange={(e) => handleInputProgress(e)}
           value={input.progress}
         />
       </>
@@ -107,7 +131,7 @@ const KanbanCard = ({
           todo_id={todo_id}
           nextGroup={nextGroup}
           prevGroup={prevGroup}
-          progress={progress} 
+          progress={progress}
           card_name={card_name}
         />
       </div>
