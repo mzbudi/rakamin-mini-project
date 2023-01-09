@@ -58,6 +58,14 @@ export const updateItemApi = createAsyncThunk(
   }
 );
 
+export const moveRightApi = createAsyncThunk(
+  "kanban/moveRight",
+  async (data) => {
+    await updateItem(data);
+    return data;
+  }
+);
+
 export const kanbanSlice = createSlice({
   name: "kanban",
   initialState,
@@ -148,6 +156,30 @@ export const kanbanSlice = createSlice({
         };
       })
       .addCase(updateItemApi.rejected, (state) => {
+        state.status = "err";
+        state = { ...state };
+      })
+      .addCase(moveRightApi.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.value = {
+          ...state.value,
+          items: {
+            ...state.value.items,
+
+            [action.payload.todo_id]: state.value.items[
+              action.payload.todo_id
+            ].filter((item) => {
+              return item.id !== action.payload.id;
+            }),
+
+            [action.payload.target_todo_id]: [
+              ...state.value.items[action.payload.target_todo_id],
+              action.payload,
+            ],
+          },
+        };
+      })
+      .addCase(moveRightApi.rejected, (state) => {
         state.status = "err";
         state = { ...state };
       });

@@ -14,7 +14,7 @@ import {
 import { ReactComponent as CloseSVG } from "../../svg/Danger.svg";
 import Modal from "../Modal";
 import { useDispatch } from "react-redux";
-import { deleteItemApi } from "../../slices/kanbanSlice";
+import { deleteItemApi, moveRightApi } from "../../slices/kanbanSlice";
 
 export default function Dropdown({ setIsOpen, item_id, todo_id }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,6 +28,17 @@ export default function Dropdown({ setIsOpen, item_id, todo_id }) {
     };
     dispatch(deleteItemApi(data));
     setModalOpen(false);
+  };
+
+  const moveRight = () => {
+    const data = {
+      id: item_id,
+      todo_id,
+      target_todo_id: 235,
+      progress_percentage: 50,
+      name: "Print",
+    };
+    dispatch(moveRightApi(data));
   };
 
   const modalConfig = {
@@ -83,6 +94,7 @@ export default function Dropdown({ setIsOpen, item_id, todo_id }) {
                   className={`${
                     active ? " text-primary" : "text-[#333333]"
                   } group flex w-full items-center px-2 py-2 text-sm leading-6 font-nunito font-semibold`}
+                  onClick={() => moveRight()}
                 >
                   {active ? (
                     <ActiveMoveRight className="mr-5 w-6 h-6" />
