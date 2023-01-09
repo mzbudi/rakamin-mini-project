@@ -17,8 +17,8 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   "auth/register",
-  async ({ email, password }) => {
-    const response = await registerUser({ email, password });
+  async (data) => {
+    const response = await registerUser(data);
     localStorage.setItem("auth_token", response.data.auth_token);
     return response.data;
   }

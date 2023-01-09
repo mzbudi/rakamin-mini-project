@@ -7,9 +7,11 @@ export function loginUser({ email, password }) {
   });
 }
 
-export function registerUser({ email, password }) {
+export function registerUser(data) {
   return axios.post("https://todo-api-18-140-52-65.rakamin.com/signup", {
-    email: email,
-    password: password,
+    name: data.name,
+    email: data.email,
+    password: data.password,
+    password_confirmation: data.password_confirmation,
   });
 }

@@ -13,8 +13,6 @@ const AuthLogin = () => {
 
   const loginStatus = useSelector(selectAuth);
 
-  console.log(loginStatus);
-
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [registEmail, setRegistEmail] = useState("");
@@ -45,7 +43,13 @@ const AuthLogin = () => {
   const handleLogin = () => dispatch(login({ email, password }));
 
   const handleRegister = () => {
-    dispatch(register({ registEmail, registPassword }));
+    const data = {
+      name: name,
+      email: registEmail,
+      password: registPassword,
+      password_confirmation: registPassword,
+    };
+    dispatch(register(data));
   };
 
   const handleCloseModal = () => {
@@ -61,7 +65,7 @@ const AuthLogin = () => {
 
   const modalConfig = {
     title: "Login Failed",
-    content: "Username or Password is wrong",
+    content: loginStatus.error,
     actionButton: (
       <button
         type="button"
