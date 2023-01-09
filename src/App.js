@@ -8,7 +8,6 @@ const token = localStorage.getItem("auth_token");
 
 function App() {
   const user = useSelector(selectAuth);
-  console.log(user);
   return <div>{user.auth_token || token ? <MainLayout /> : <Auth />}</div>;
 }
 
